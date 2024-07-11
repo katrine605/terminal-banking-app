@@ -44,8 +44,8 @@ public class UserController {
     }
 
     public void promptLoggedInUserForService(Map<String,String> controlMap){
-        System.out.println("Welcome %s!".formatted(controlMap.get("UserName")));
-        System.out.println("What would you like to do?");
+        System.out.println("Hi %s!".formatted(controlMap.get("UserName")));
+        System.out.println("What would you like to do today?");
         System.out.println("1. Create an account");
         System.out.println("2. View my accounts");
         System.out.println("3. Logout");

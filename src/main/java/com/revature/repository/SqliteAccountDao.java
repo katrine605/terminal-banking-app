@@ -57,4 +57,42 @@ public class SqliteAccountDao implements AccountDao {
         }
     }
 
+    @Override
+    public Account getAccountById(Integer accountId) {
+        String sql = "SELECT * FROM account WHERE id = ?";
+        try(Connection connection = DatabaseConnector.createConnection()) {
+           PreparedStatement preparedStatement = connection.prepareStatement(sql); 
+           preparedStatement.setInt(1, accountId);
+           ResultSet result = preparedStatement.executeQuery();
+            if(result.next()){
+                Account account = new Account();
+                account.setId(result.getInt("id"));
+                account.setAccountName(result.getString("accountName"));
+                account.setBalance(result.getDouble("balance"));
+                account.setAccountHolderId(result.getInt("accountHolderId"));
+                return account;
+            }
+            throw new AccountSQLException("Account could not be found, please try again");
+        } catch (SQLException e) {
+            throw new AccountSQLException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Account updateAccountBalance(Account accountToBeUpdated) {
+        String sql = "UPDATE account SET balance = ? WHERE id = ?";
+        try(Connection connection = DatabaseConnector.createConnection()) {
+           PreparedStatement preparedStatement = connection.prepareStatement(sql); 
+           preparedStatement.setDouble(1, accountToBeUpdated.getBalance());
+           preparedStatement.setInt(2, accountToBeUpdated.getId());
+           int result = preparedStatement.executeUpdate();
+           if(result == 1){
+            return accountToBeUpdated;
+           }
+           throw new AccountSQLException("Balance could not be updated, please try again");
+        } catch (SQLException e) {
+            throw new AccountSQLException(e.getMessage());
+        }
+    }
+
 }

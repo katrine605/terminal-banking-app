@@ -34,8 +34,8 @@ public class App
                         while("ViewAccounts".equals(controlMap.get("Options"))){
                             accountController.promptUserForAccountChoice(controlMap);
                         }
-                        if("ChosenAccount".equals(controlMap.get("Options"))){
-                            accountController.getAccountInfo(controlMap);
+                        while("ChosenAccount".equals(controlMap.get("Options"))){
+                            accountController.promptUserForAccountAction(controlMap);
                         }
                         while("CreateAccount".equals(controlMap.get("Options"))){
                             accountController.promptUserForAccountInfo(controlMap);
