@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.revature.entity.Account;
+import com.revature.exception.AccountCreationException;
 import com.revature.exception.AccountNotFoundException;
 import com.revature.service.AccountService;
 
@@ -27,7 +28,7 @@ public class AccountController {
             }
             System.out.println("b. Go back to Overview");
             String accountChoice = scanner.nextLine();
-            if(accountChoice.equals("b")){
+            if("b".equals(accountChoice)){
                controlMap.remove("Options");
             } else {
                 String accountId = accountService.validateAccountChoice(userAccounts, accountChoice);
@@ -40,7 +41,24 @@ public class AccountController {
         }
     }
 
+    public void promptUserForAccountInfo(Map<String, String> controlMap) {
+        try{
+            System.out.println("In order to open a new account at the bank, please answer the following questions: ");
+            System.out.println("What would you like to name your new account?");
+            String accountName = scanner.nextLine();
+            System.out.println("Please enter the starting balance of the account (make sure to format the balance as 00.00):");
+            String accountBalance = scanner.nextLine();
+            Account newAccount = accountService.createNewAccount(accountName, accountBalance, Integer.valueOf(controlMap.get("UserId")));
+            System.out.println("Your new account '%s' has been created with a starting balance of %f!".formatted(newAccount.getAccountName(), newAccount.getBalance())); 
+        }catch(AccountCreationException ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            controlMap.remove("Options");
+        }
+    }
+
     public void getAccountInfo(Map<String,String> controlMap){
         System.out.println(controlMap.keySet());
     }
+
 }

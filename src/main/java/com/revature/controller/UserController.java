@@ -53,15 +53,16 @@ public class UserController {
         String userChoice = scanner.nextLine();
         switch (userChoice) {
             case "1":
-                break;
-                case "2":
-                controlMap.put("Options", "ViewAccounts");
-                break;        
-                case "3":
-                logout(controlMap);
-                break;    
-                case "q":
-                quitApp(controlMap);
+            controlMap.put("Options", "CreateAccount");
+            break;
+            case "2":
+            controlMap.put("Options", "ViewAccounts");
+            break;        
+            case "3":
+            logout(controlMap);
+            break;    
+            case "q":
+            quitApp(controlMap);
         }
     }
 

@@ -30,11 +30,16 @@ public class App
                 userController.promptUserForService(controlMap);
                 while(controlMap.containsKey("UserId")&& controlMap.containsKey("UserName")){
                     userController.promptLoggedInUserForService(controlMap);
-                    while(controlMap.get("Options") == "ViewAccounts"){
-                        accountController.promptUserForAccountChoice(controlMap);
+                    if(controlMap.containsKey("Options")){
+                        while("ViewAccounts".equals(controlMap.get("Options"))){
+                            accountController.promptUserForAccountChoice(controlMap);
+                        }
+                        if("ChosenAccount".equals(controlMap.get("Options"))){
+                            accountController.getAccountInfo(controlMap);
+                        }
+                        while("CreateAccount".equals(controlMap.get("Options"))){
+                            accountController.promptUserForAccountInfo(controlMap);
                     }
-                    if(controlMap.get("Options") == "ChosenAccount"){
-                        accountController.getAccountInfo(controlMap);
                     }
                 }
             }
