@@ -95,4 +95,21 @@ public class SqliteAccountDao implements AccountDao {
         }
     }
 
+    @Override
+    public void deleteAccount(Account accountToBeDeleted) {
+        String sql = "DELETE FROM account WHERE id = ?";
+        try(Connection connection = DatabaseConnector.createConnection()) {
+           PreparedStatement preparedStatement = connection.prepareStatement(sql); 
+           preparedStatement.setInt(1, accountToBeDeleted.getId());
+           int result = preparedStatement.executeUpdate();
+           if(result == 1){
+            System.out.println("The %s account has been closed".formatted(accountToBeDeleted.getAccountName()));
+           }else{
+            throw new AccountSQLException("Account could not be closed, please try again");
+           }
+        } catch (SQLException e) {
+            throw new AccountSQLException(e.getMessage());
+        }
+    }
+
 }

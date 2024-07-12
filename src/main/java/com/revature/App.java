@@ -26,6 +26,7 @@ public class App
             AccountController accountController = new AccountController(scanner, accountService);
             Map<String, String> controlMap = new HashMap<>(); 
             controlMap.put("Session Loop", "true");
+            userController.showLogo(false);
             while(Boolean.parseBoolean(controlMap.get("Session Loop"))){
                 userController.promptUserForService(controlMap);
                 while(controlMap.containsKey("UserId")&& controlMap.containsKey("UserName")){

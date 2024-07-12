@@ -19,8 +19,7 @@ public class UserController {
     }
 
     public void promptUserForService(Map<String,String> controlMap){
-        System.out.println("Welcome to the Bank!");
-        System.out.println("Please choose one of the following options in order to use our banking services:");
+        System.out.println("\nPlease choose one of the following options in order to use our banking services:");
         System.out.println("1. Register an account");
         System.out.println("2. Login");
         System.out.println("q. Quit");
@@ -44,7 +43,7 @@ public class UserController {
     }
 
     public void promptLoggedInUserForService(Map<String,String> controlMap){
-        System.out.println("Hi %s!".formatted(controlMap.get("UserName")));
+        System.out.println("\nHi %s!".formatted(controlMap.get("UserName")));
         System.out.println("What would you like to do today?");
         System.out.println("1. Create an account");
         System.out.println("2. View my accounts");
@@ -69,7 +68,7 @@ public class UserController {
     public void registerNewUser(){
         User newUserCredentials = getUserCredentials();
         User newUser = userService.validateNewCredentials(newUserCredentials);
-        System.out.println("A new account has been created for %s. Please login to continue.".formatted(newUser.getUsername()));
+        System.out.println("\nA new account has been created for %s. Please login to continue.".formatted(newUser.getUsername()));
     }
 
     public User login(){
@@ -81,7 +80,7 @@ public class UserController {
         controlMap.remove("UserId");
         controlMap.remove("UserName");
         controlMap.remove("Options");
-        System.out.println("You have been logged out.");
+        System.out.println("\nYou have been logged out.");
     }
 
     public User getUserCredentials(){
@@ -99,8 +98,32 @@ public class UserController {
         if(controlMap.containsKey("UserId")){
             logout(controlMap);
         }
-        System.out.println("Thank you for trusting us with your banking services. We hope you have a wonderful day!");
+        System.out.println();
+        showLogo(true);
         controlMap.put("Session Loop", "false");
+    }
+
+    public void showLogo(Boolean logout){
+        String logo =  "        _._._                       _._._\n"
+                        + "       _|   |_                     _|   |_ \n"
+                        + "       | ... |_._._._._._._._._._._| ... | \n"
+                        + "       | ||| |  o TERMINAL BANK o  | ||| | \n"
+                        + "       | \"\"\" |  \"\"\"    \"\"\"    \"\"\"  | \"\"\" | \n"
+                        + "  ())  |[-|-]| [-|-]  [-|-]  [-|-] |[-|-]|  ()) \n"
+                        + " (())) |     |---------------------|     | (())) \n"
+                        + "(())())| \"\"\" |  \"\"\"    \"\"\"    \"\"\"  | \"\"\" |(())()) \n"
+                        + "(()))()|[-|-]|  :::   .-\"-.   :::  |[-|-]|(()))() \n"
+                        + "()))(()|     | |~|~|  |_|_|  |~|~| |     |()))(() \n"
+                        + "   ||  |_____|_|_|_|__|_|_|__|_|_|_|_____|  || \n"
+                        + " ~ ~^^ @@@@@@@@@@@@@@/=======\\@@@@@@@@@@@@@@ ^^~ ~ \n"
+                        + "      ^~^~                                ~^~^";
+        System.out.println(logo);
+        if(logout){
+            System.out.println("Thank you for trusting us with your banking needs.");
+            System.out.println("\t  We hope you have a wonderful day!\n");
+        }else {
+            System.out.println("\t  Welcome to the Terminal Bank App!");
+        }                
     }
 
 }

@@ -9,4 +9,5 @@ public interface AccountDao {
     List<Account> getAllUserAccounts(Integer accountHolderId);
     Account getAccountById(Integer accountId);
     Account updateAccountBalance(Account account);
+    void deleteAccount(Account accounToBeDeleted);
 } 

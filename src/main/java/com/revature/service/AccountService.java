@@ -73,7 +73,6 @@ public class AccountService {
         Double currentBalance =  accountToBeUpdated.getBalance();
         try{
             Double verifiedBalanceUpdate = Double.valueOf(balanceUpdate);
-            System.out.println(verifiedBalanceUpdate);
             if(verifiedBalanceUpdate > 0.0){
                 if(action == "withdraw"){
                     if(currentBalance - verifiedBalanceUpdate >= 0){
@@ -95,6 +94,10 @@ public class AccountService {
 
     public Account getAccountById(Integer Id){
          return accountDao.getAccountById(Id);
+    }
+
+    public void deleteAccount(Account accounToBeDeleted) {
+        accountDao.deleteAccount(accounToBeDeleted);
     }
 
 }

@@ -7,7 +7,7 @@ CREATE TABLE "user"(
 	password text(30)
 );
 
-INSERT INTO "user"(username,password) VALUES('admin',12345),('John Smith',12345);
+INSERT INTO "user"(username,password) VALUES('admin',12345),('user1',12345);
 
 CREATE TABLE account(
 	id integer primary key autoincrement,
