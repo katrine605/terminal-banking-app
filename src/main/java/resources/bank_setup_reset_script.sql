@@ -7,7 +7,7 @@ CREATE TABLE "user"(
 	password text(30)
 );
 
-INSERT INTO "user"(username,password) VALUES('admin',12345),('user1',12345);
+INSERT INTO "user"(username,password) VALUES('admin',12345);
 
 CREATE TABLE account(
 	id integer primary key autoincrement,
@@ -16,7 +16,6 @@ CREATE TABLE account(
 	accountHolderId integer NOT NULL REFERENCES "user"(id)
 );
 
-INSERT INTO account(accountName,accountHolderId) Values("checking",1),("checking",2);
-INSERT INTO account(accountName,balance,accountHolderId) Values("savings",1050.60,1),("savings",1050.60,2);
+INSERT INTO account(accountName,balance,accountHolderId) Values("checking",1050.65,1),("savings",10050.87,1);
 
 SELECT * FROM account a JOIN "user" u ON a.id = u.id;

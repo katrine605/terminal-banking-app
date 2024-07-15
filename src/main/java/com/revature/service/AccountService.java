@@ -74,14 +74,14 @@ public class AccountService {
         try{
             Double verifiedBalanceUpdate = Double.valueOf(balanceUpdate);
             if(verifiedBalanceUpdate > 0.0){
-                if(action == "withdraw"){
+                if("withdraw".equals(action)){
                     if(currentBalance - verifiedBalanceUpdate >= 0){
                         accountToBeUpdated.setBalance(currentBalance - verifiedBalanceUpdate);
                         return accountDao.updateAccountBalance(accountToBeUpdated);
                     }else{
                         throw new AccountUpdateException("There is not enough money in the account to withdraw $%.2f".formatted(verifiedBalanceUpdate));
                     } 
-                }else if(action == "deposit"){
+                }else if("deposit".equals(action)){
                     accountToBeUpdated.setBalance(currentBalance + verifiedBalanceUpdate);
                     return accountDao.updateAccountBalance(accountToBeUpdated);
                 }

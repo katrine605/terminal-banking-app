@@ -50,7 +50,7 @@ public class AccountController {
             System.out.println("Please enter the starting balance of the account:");
             String accountBalance = scanner.nextLine();
             Account newAccount = accountService.createNewAccount(accountName, accountBalance, Integer.valueOf(controlMap.get("UserId")));
-            System.out.println("Your new account '%s' has been created with a starting balance of $%.2f!".formatted(newAccount.getAccountName(), newAccount.getBalance())); 
+            System.out.println("Your new account '%s' has been created with a starting balance of $%,.2f!".formatted(newAccount.getAccountName(), newAccount.getBalance())); 
             controlMap.put("Options", "ChosenAccount");
             controlMap.put("AccountId", String.valueOf(newAccount.getId()));
         }catch(AccountCreationException ex){
@@ -63,7 +63,7 @@ public class AccountController {
         try{
             Account currentAccount = accountService.getAccountById(Integer.valueOf(controlMap.get("AccountId")));
             System.out.println("\nPlease see below for the account information:");
-            System.out.println("Account Name: %s\nAccount Balance: $%.2f".formatted(currentAccount.getAccountName(), currentAccount.getBalance()));
+            System.out.println("Account Name: %s\nAccount Balance: $%,.2f".formatted(currentAccount.getAccountName(), currentAccount.getBalance()));
             System.out.println("\nHow would you like to proceed:");
             System.out.println("1. Deposit money into account");
             System.out.println("2. Withdraw money from account");
@@ -79,7 +79,7 @@ public class AccountController {
                     System.out.println("\nHow much money would you like to %s?".formatted(action));
                     String balance = scanner.nextLine();
                     Account updatedAccount = accountService.updateAccountBalance(currentAccount.getId(), balance, action);
-                    System.out.println("The balance of the account has been updated to $%.2f".formatted(updatedAccount.getBalance()));
+                    System.out.println("The balance of the account has been updated to $%,.2f".formatted(updatedAccount.getBalance()));
                 } else if("3".equals(accountChoice)){
                     if(currentAccount.getBalance() > 0){
                         throw new AccountUpdateException("Please make sure all money has been withdrawn before closing the account.");
